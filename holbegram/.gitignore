@@ -48,6 +48,7 @@ ios/Flutter/App.framework/
 ios/Flutter/Flutter.podspec.lock
 ios/Pods/
 ios/Podfile.lock
+ios/Runner/GoogleService-Info.plist
 
 # Linux
 linux/flutter/ephemeral/
@@ -67,3 +68,4 @@ android/app/build/
 android/local.properties
 android/gradle.properties
 android/settings_aar.gradle
+android/app/google-services.json

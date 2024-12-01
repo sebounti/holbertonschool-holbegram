@@ -24,6 +24,7 @@ dependencies:
   badges: ^2.0.2
   provider: ^6.0.5
   google_sign_in: ^5.4.2
+  flutter_dotenv: ^5.0.2
 
 
 dev_dependencies:
@@ -48,7 +49,7 @@ flutter:
       - family: InstagramSans
         fonts:
           - asset: assets/fonts/InstagramSans.ttf
-          
+
 flutter_icons:
   android: false
   ios: true
