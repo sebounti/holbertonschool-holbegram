@@ -1,0 +1,38 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "com.google.gms.google-services" // Plugin pour Firebase
+}
+
+android {
+    namespace = "com.example.holbegram"
+    compileSdk = 33
+
+    defaultConfig {
+        applicationId = "com.holbergram.app" // Doit correspondre au package_name dans google-services.json
+        minSdk = 21
+        targetSdk = 33
+        versionCode = 1
+        versionName = "1.0"
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:32.1.0') // Bill of Materials pour Firebase
+    implementation 'com.google.firebase:firebase-analytics' // Exemple : Firebase Analytics
+}
