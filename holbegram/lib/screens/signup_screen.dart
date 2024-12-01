@@ -107,7 +107,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: screenHeight * 0.05),
 
                 // Displays the input fields for registration
-                Padding(                Padding(
+                Padding(
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                   child: Column(
                     children: <Widget>[
@@ -186,34 +186,33 @@ class SignUpScreenState extends State<SignUpScreen> {
                       ),
                       SizedBox(height: screenHeight * 0.03),
                       const Divider(thickness: 2),
-
-                      // Displays the text for logging in if the user already has an account
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Already have an account?",
-                            style: TextStyle(
-                              fontSize: screenHeight * 0.017,
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: screenHeight * 0.02),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Don't have an account",
+                              style: TextStyle(fontSize: screenHeight * 0.017),
                             ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const LoginScreen()),
-                              );
-                            },
-                            child: Text(
-                              'Log In',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: const Color.fromARGB(218, 226, 37, 24),
-                                fontSize: screenHeight * 0.017,
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const SignUpScreen()),
+                                );
+                              },
+                              child: Text(
+                                'Sign up',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(218, 226, 37, 24),
+                                  fontSize: screenHeight * 0.017,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
