@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:holbegram/methods/auth_methods.dart';
 import 'package:holbegram/screens/home.dart';
 
-//  Classe pour l'écran d'ajout d'image de profil
+// Class for the profile image upload screen
 class AddPicture extends StatefulWidget {
   final String email;
   final String password;
@@ -21,12 +21,12 @@ class AddPicture extends StatefulWidget {
   AddPictureState createState() => AddPictureState();
 }
 
-// Classe State associée au widget AddPicture
+// State class associated with the AddPicture widget
 class AddPictureState extends State<AddPicture> {
   Uint8List? _image;
   bool _isLoading = false;
 
-  // Méthode pour sélectionner une image de la galerie
+  // Method to select an image from the gallery
   void selectImageFromGallery() async {
     Uint8List image = await pickImage(ImageSource.gallery);
     setState(() {
@@ -34,7 +34,7 @@ class AddPictureState extends State<AddPicture> {
     });
   }
 
-  // Méthode pour sélectionner une image de l'appareil photo
+  // Method to select an image from the camera
   void selectImageFromCamera() async {
     Uint8List image = await pickImage(ImageSource.camera);
     setState(() {
@@ -42,7 +42,7 @@ class AddPictureState extends State<AddPicture> {
     });
   }
 
-  // Méthode pour choisir une image de la galerie ou de l'appareil photo
+  // Method to choose an image from the gallery or camera
   Future<Uint8List> pickImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     XFile? file = await picker.pickImage(source: source);
@@ -53,7 +53,7 @@ class AddPictureState extends State<AddPicture> {
     }
   }
 
-  // Méthode pour télécharger l'image et créer un utilisateur
+  // Method to upload the image and create a user
   Future<void> uploadImage() async {
     if (_image == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -67,7 +67,7 @@ class AddPictureState extends State<AddPicture> {
     });
 
     try {
-      // Crée un utilisateur avec l'image téléchargée
+      // Creates a user with the uploaded image
       String res = await AuthMethods().signUpUser(
         email: widget.email,
         username: widget.username,
@@ -75,14 +75,14 @@ class AddPictureState extends State<AddPicture> {
         file: _image,
       );
 
-      // Vérifie si le widget est toujours monté
+      // Checks if the widget is still mounted
       if (!mounted) return;
 
       setState(() {
         _isLoading = false;
       });
 
-      // Affiche un message de réussite ou d'échec
+      // Displays a success or failure message
       if (res == 'success') {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Sign up successful')),
@@ -91,7 +91,7 @@ class AddPictureState extends State<AddPicture> {
           context,
           MaterialPageRoute(builder: (context) => const Home()),
         );
-        // Redirige l'utilisateur vers la page de connexion
+        // Redirects the user to the login page
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(res)),
@@ -104,7 +104,7 @@ class AddPictureState extends State<AddPicture> {
         _isLoading = false;
       });
 
-      // Affiche un message d'échec
+      // Displays a failure message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Failed to sign up: $e')),
       );
@@ -127,7 +127,7 @@ class AddPictureState extends State<AddPicture> {
                 children: <Widget>[
                   SizedBox(height: screenHeight * 0.04),
 
-                  // Affiche le titre et le logo de l'application
+                  // Displays the title and logo of the application
                   Text(
                     'Holbegram',
                     style: TextStyle(
@@ -142,7 +142,7 @@ class AddPictureState extends State<AddPicture> {
                   ),
                   SizedBox(height: screenHeight * 0.05),
 
-                   // Message de bienvenue et instructions pour ajouter une image
+                   // Welcome message and instructions to add an image
                   Text(
                     'Hello, ${widget.username} Welcome to Holbegram.',
                     textAlign: TextAlign.left,
@@ -163,7 +163,7 @@ class AddPictureState extends State<AddPicture> {
                   ),
                   SizedBox(height: screenHeight * 0.05),
 
-                  // Avatar de l'utilisateur ou image de profil par défaut
+                  // User avatar or default profile image
                   _image != null
                       ? CircleAvatar(
                           radius: screenWidth * 0.22,
@@ -176,7 +176,7 @@ class AddPictureState extends State<AddPicture> {
                         ),
                   SizedBox(height: screenHeight * 0.02),
 
-                  // Boutons pour sélectionner une image de la galerie ou de l'appareil photo
+                  // Buttons to select an image from the gallery or camera
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -195,7 +195,7 @@ class AddPictureState extends State<AddPicture> {
                   ),
                   SizedBox(height: screenHeight * 0.04),
 
-                  // Bouton pour télécharger l'image et créer un utilisateur
+                  // Button to upload the image and create a user
                   _isLoading
                       ? const CircularProgressIndicator()
                       : ElevatedButton(

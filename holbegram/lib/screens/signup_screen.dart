@@ -3,7 +3,7 @@ import 'package:holbegram/widgets/text_field.dart';
 import 'login_screen.dart';
 import 'upload_image_screen.dart';
 
-//  Classe pour l'écran d'inscription
+//  Class for the signup screen
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -11,7 +11,7 @@ class SignUpScreen extends StatefulWidget {
   SignUpScreenState createState() => SignUpScreenState();
 }
 
-// Classe State associée au widget SignUpScreen
+	// Classe State associée au widget SignUpScreen
 class SignUpScreenState extends State<SignUpScreen> {
   // Déclaration des contrôleurs pour gérer les entrées utilisateur
   final TextEditingController emailController = TextEditingController();
@@ -20,7 +20,7 @@ class SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController passwordConfirmController = TextEditingController();
   bool _passwordVisible = true;
 
-  // Libère les ressources des contrôleurs lorsqu'ils ne sont plus nécessaires
+	// Releases the resources of the controllers when they are no longer needed
   @override
   void dispose() {
     emailController.dispose();
@@ -30,14 +30,14 @@ class SignUpScreenState extends State<SignUpScreen> {
     super.dispose();
   }
 
-  // Initialise l'état du widget
+	// Initializes the widget state
   @override
   void initState() {
     super.initState();
     _passwordVisible = true;
   }
 
-  // Vérifie si les champs ne sont pas vides avant de naviguer vers AddPicture
+  // Checks if the fields are not empty before navigating to AddPicture
   void navigateToAddPicture() {
     if (emailController.text.isEmpty ||
         usernameController.text.isEmpty ||
@@ -64,7 +64,7 @@ class SignUpScreenState extends State<SignUpScreen> {
     }
   }
 
-  // Construire l'interface utilisateur
+  // Build the user interface
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
@@ -80,7 +80,7 @@ class SignUpScreenState extends State<SignUpScreen> {
               children: <Widget>[
                 SizedBox(height: screenHeight * 0.06),
 
-                // Affiche le texte et le logo de l'application
+                // Displays the application's text and logo
                 Text(
                   'Holbegram',
                   style: TextStyle(
@@ -95,7 +95,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SizedBox(height: screenHeight * 0.05),
 
-                // Affiche le texte d'invitation à s'inscrire
+                // Displays the sign-up invitation text
                 Text(
                   'Sign up to see photos and videos\nfrom your friends.',
                   textAlign: TextAlign.center,
@@ -106,8 +106,8 @@ class SignUpScreenState extends State<SignUpScreen> {
                 ),
                 SizedBox(height: screenHeight * 0.05),
 
-                // Affiche les champs de saisie pour l'inscription
-                Padding(
+                // Displays the input fields for registration
+                Padding(                Padding(
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                   child: Column(
                     children: <Widget>[
@@ -141,7 +141,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                       ),
                       SizedBox(height: screenHeight * 0.03),
 
-                      // Affiche le champ de confirmation du mot de passe
+                      // Displays the password confirmation field
                       TextFieldInput(
                         controller: passwordConfirmController,
                         isPassword: !_passwordVisible,
@@ -161,7 +161,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                       ),
                       SizedBox(height: screenHeight * 0.06),
 
-                      // Affiche le bouton d'inscription
+                      // Displays the sign-up button
                       SizedBox(
                         height: screenHeight * 0.06,
                         width: double.infinity,
@@ -187,7 +187,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(height: screenHeight * 0.03),
                       const Divider(thickness: 2),
 
-                      // Affiche le texte pour se connecter si l'utilisateur a déjà un compte
+                      // Displays the text for logging in if the user already has an account
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordVisible = true;
   }
 
-  // Méthode pour gérer la connexion Google
+// Displays the input fields for registration
   Future<void> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
         );
-        // Connexion à Firebase avec les informations d'identification Google
+        // Connecting to Firebase with Google credentials
         final UserCredential userCredential =
             await FirebaseAuth.instance.signInWithCredential(credential);
 
@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
           const SnackBar(content: Text('Google Sign-In successful!')),
         );
 
-        // Rediriger vers la page d'accueil
+		// Redirect to the home page
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const Home()),

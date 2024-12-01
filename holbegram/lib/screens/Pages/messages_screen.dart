@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// Classe principale pour l'écran des messages
+// Main class for the messages screen
 class MessagesScreen extends StatefulWidget {
   const MessagesScreen({super.key});
 
@@ -10,7 +10,7 @@ class MessagesScreen extends StatefulWidget {
   MessagesScreenState createState() => MessagesScreenState();
 }
 
-//  État de l'écran des messages
+// State of the messages screen
 class MessagesScreenState extends State<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class MessagesScreenState extends State<MessagesScreen> {
         iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        // StreamBuilder pour afficher les messages de l'utilisateur
+        // StreamBuilder to display the user's messages
         stream: FirebaseFirestore.instance
             .collection('users')
             .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -41,10 +41,10 @@ class MessagesScreenState extends State<MessagesScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // Récupérer les messages de l'utilisateur
+          // Retrieving the user's messages
           final messages = snapshot.data!.docs;
 
-          // Si l'utilisateur n'a pas de messages à afficher
+          // If the user has no messages to display
           if (messages.isEmpty) {
             return const Center(
               child: Text(
@@ -54,7 +54,7 @@ class MessagesScreenState extends State<MessagesScreen> {
             );
           }
 
-          // Afficher les messages de l'utilisateur
+          // Displaying the user's messages
           return ListView.builder(
             itemCount: messages.length,
             itemBuilder: (context, index) {
@@ -68,7 +68,7 @@ class MessagesScreenState extends State<MessagesScreen> {
   }
 }
 
-// Classe pour afficher un message
+// Class to display a message
 class MessageTile extends StatelessWidget {
   final QueryDocumentSnapshot message;
   const MessageTile({super.key, required this.message});
@@ -81,17 +81,17 @@ class MessageTile extends StatelessWidget {
         .doc(message.id)
         .delete();
 
-    // Afficher un message de confirmation
+    // Displaying a confirmation message
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Message deleted')),
     );
   }
 
-  // Fonction pour répondre à un message
+  // Method to reply to a message
   void replyToMessage(BuildContext context, String senderId) async {
     TextEditingController replyController = TextEditingController();
 
-    // Afficher une boîte de dialogue pour répondre au message
+    // Displaying a dialog box to reply to the message
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -122,12 +122,12 @@ class MessageTile extends StatelessWidget {
                   'read': false,
                 });
 
-                // Afficher un message de confirmation
+                // Displaying a confirmation message
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Reply sent successfully')),
                 );
 
-                // Fermer la boîte de dialogue
+                // Closing the dialog box
                 Navigator.of(context).pop();
               }
             },
@@ -138,7 +138,7 @@ class MessageTile extends StatelessWidget {
     );
   }
 
-  // Afficher les détails du message
+  // Displaying the message details
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
@@ -154,7 +154,7 @@ class MessageTile extends StatelessWidget {
           );
         }
 
-        // Récupérer les détails de l'expéditeur
+        // Retrieving the sender's details
         var sender = snapshot.data!.data() as Map<String, dynamic>;
         var senderName = sender['username'];
         var senderPhotoUrl = sender['photoUrl'];
@@ -168,7 +168,7 @@ class MessageTile extends StatelessWidget {
               .update({'read': true});
         }
 
-        // Afficher le message de l'expéditeur avec des options pour répondre et supprimer
+        // Displaying the sender's message with options to reply and delete
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 45.0),
           child: Card(

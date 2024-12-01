@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// Classe pour représenter un utilisateur
+// Class to represent a user
 class Users {
   final String uid;
   final String email;
@@ -13,7 +13,7 @@ class Users {
   final List<dynamic> saved;
   final String searchKey;
 
-  //  Constructeur de la classe Users
+  // Constructor for the Users class
   Users({
     required this.uid,
     required this.email,
@@ -27,7 +27,7 @@ class Users {
     required this.searchKey,
   });
 
-  // Méthode pour convertir une instance de Users en une représentation Map
+  // Method to convert a Users instance to a Map representation
   Map<String, dynamic> toJson() {
     return {
       'uid': uid,
@@ -43,11 +43,11 @@ class Users {
     };
   }
 
-  // Méthode pour créer une instance de Users à partir d'un DocumentSnapshot
+  // Method to create a Users instance from a DocumentSnapshot
   static Users fromSnap(DocumentSnapshot snap) {
     var snapshot = snap.data() as Map<String, dynamic>?;
 
-    // Vérifier si le DocumentSnapshot contient des données
+    // Check if the DocumentSnapshot contains data
     if (snapshot == null) {
       throw const FormatException("Invalid snapshot data");
     }

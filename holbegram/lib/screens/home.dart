@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:holbegram/widgets/bottom_nav.dart';
 
-//  Classe pour gérer la page d'accueil
+// Class to manage the home page
 class Home extends StatefulWidget {
   const Home({super.key});
 

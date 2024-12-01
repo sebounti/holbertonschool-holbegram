@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// Widget Favorite, affichant les posts favoris de l'utilisateur
+// Widget Favorite, displaying the user's favorite posts
 class Favorite extends StatelessWidget {
   const Favorite({super.key});
 
@@ -12,9 +12,9 @@ class Favorite extends StatelessWidget {
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
-          // Ajout d'un espace en haut de l'écran
+          // Adding space at the top of the screen
           const SliverToBoxAdapter(child: SizedBox(height: 28)),
-          // Barre d'application personnalisée
+          // Custom app bar
           SliverAppBar(
             backgroundColor: Colors.white,
             elevation: 0,
@@ -36,60 +36,60 @@ class Favorite extends StatelessWidget {
               ),
             ),
           ),
-          // Reste de l'écran remplie par le StreamBuilder
+          // Remaining part of the screen filled by the StreamBuilder
           SliverFillRemaining(
             child: StreamBuilder(
-              // Écoute des données de la collection 'favorites' de l'utilisateur actuel
+              // Listening to the data from the user's 'favorites' collection
               stream: FirebaseFirestore.instance
                   .collection('users')
                   .doc(FirebaseAuth.instance.currentUser!.uid)
                   .collection('favorites')
                   .snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                // Gestion des erreurs
+                // Error handling
                 if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 }
-                // Affichage d'un cercle de chargement si les données sont en cours de chargement
+                // Displaying a loading circle if data is loading
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                //  Récupération des documents favoris
+                // Retrieving favorite documents
                 final favoriteDocs = snapshot.requireData.docs;
 
-                // Affichage des posts favoris sous forme de liste
+                // Displaying favorite posts as a list
                 return ListView.builder(
                   padding: const EdgeInsets.only(top: 20),
                   itemCount: favoriteDocs.length,
                   itemBuilder: (context, index) {
                     var favoriteDoc = favoriteDocs[index];
 
-                    // FutureBuilder pour récupérer les détails du post favori
+                    // FutureBuilder to retrieve details of the favorite post
                     return FutureBuilder<DocumentSnapshot>(
                       future: FirebaseFirestore.instance
                           .collection('posts')
                           .doc(favoriteDoc['postId'])
                           .get(),
                       builder: (context, AsyncSnapshot<DocumentSnapshot> postSnapshot) {
-                        // Gestion des erreurs
+                        // Error handling
                         if (postSnapshot.hasError) {
                           return Center(child: Text('Error: ${postSnapshot.error}'));
                         }
-                        // Affichage d'un cercle de chargement si les données sont en cours de chargement
+                        // Displaying a loading circle if data is loading
                         if (postSnapshot.connectionState == ConnectionState.waiting) {
                           return const Center(child: CircularProgressIndicator());
                         }
 
-                        // Vérification si le post existe
+                        // Checking if the post exists
                         if (!postSnapshot.hasData || !postSnapshot.data!.exists) {
                           return Container();
                         }
 
-                        // Récupération des données du post
+                        // Retrieving post data
                         var post = postSnapshot.data!;
 
-                        // Affichage de l'image du post favori
+                        // Displaying the favorite post image
                         return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                           height: 250,

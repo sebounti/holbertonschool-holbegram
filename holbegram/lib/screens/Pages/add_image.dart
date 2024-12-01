@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:holbegram/screens/pages/methods/post_storage.dart';
 import 'package:holbegram/widgets/bottom_nav.dart';
 
-//  Classe principale de l'écran pour ajouter une image
+// Main class for the screen to add an image
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
 
@@ -14,7 +14,7 @@ class AddImage extends StatefulWidget {
   AddImageState createState() => AddImageState();
 }
 
-// État associé à la classe AddImage
+// State associated with the AddImage class
 class AddImageState extends State<AddImage> {
   Uint8List? _image;
   bool _isLoading = false;
@@ -29,7 +29,7 @@ class AddImageState extends State<AddImage> {
     _getUserData();
   }
 
-  // Récupère les données de l'utilisateur actuel
+  // Retrieves the current user's data
   Future<void> _getUserData() async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
@@ -41,7 +41,7 @@ class AddImageState extends State<AddImage> {
     }
   }
 
-  // Affiche une feuille de modal pour sélectionner une image
+  // Displays a modal sheet to select an image
   void selectImage() async {
     showModalBottomSheet(
       context: context,
@@ -80,7 +80,7 @@ class AddImageState extends State<AddImage> {
     );
   }
 
-  // Sélectionne une image à partir de la source spécifiée (galerie ou appareil photo)
+  // Selects an image from the specified source (gallery or camera)
   Future<Uint8List> pickImage(ImageSource source) async {
     final ImagePicker picker = ImagePicker();
     XFile? file = await picker.pickImage(source: source);
@@ -91,7 +91,7 @@ class AddImageState extends State<AddImage> {
     }
   }
 
-  // Télécharge le post avec l'image et la légende
+  // Uploads the post with the image and caption
   Future<void> uploadPost() async {
     if (_image == null) {
       if (mounted) {
@@ -106,7 +106,7 @@ class AddImageState extends State<AddImage> {
       _isLoading = true;
     });
 
-    // Récupère l'utilisateur actuel et les données de l'utilisateur
+    // Retrieves the current user and user data
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null && username != null && profileImageUrl != null) {
@@ -118,7 +118,7 @@ class AddImageState extends State<AddImage> {
           _image!,
         );
 
-        // Met à jour l'état de l'écran et affiche un message en fonction du résultat
+        // Updates the screen state and shows a message based on the result
         if (mounted) {
           setState(() {
             _isLoading = false;
@@ -146,7 +146,7 @@ class AddImageState extends State<AddImage> {
           _isLoading = false;
         });
 
-        // Affiche un message en cas d'erreur lors de l'upload
+        // Displays a message in case of an error during upload
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Failed to upload post: $e')),
         );

@@ -7,7 +7,7 @@ import 'package:holbegram/screens/pages/favorite.dart';
 import 'package:holbegram/screens/pages/profile_screen.dart';
 
 
-// Classe pour gérer la navigation entre les pages
+// Class to manage navigation between pages
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
 
@@ -15,26 +15,26 @@ class BottomNav extends StatefulWidget {
   BottomNavState createState() => BottomNavState();
 }
 
-// Classe pour gérer l'état de la navigation entre les pages
+// Class to manage the state of navigation between pages
 class BottomNavState extends State<BottomNav> {
   int _currentIndex = 0;
   late PageController _pageController;
 
-  // Fonction initState pour initialiser le contrôleur de page
+  // initState function to initialize the page controller
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
   }
 
-  // Libère les ressources utilisées par le contrôleur de page
+  // Releases the resources used by the page controller
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
   }
 
-  // Fonction pour changer de page
+  // Function to change the page
   void onPageChanged(int index) {
     setState(() {
       _currentIndex = index;
@@ -67,7 +67,7 @@ class BottomNavState extends State<BottomNav> {
         curve: Curves.easeInBack,
         onItemSelected: onPageChanged,
         items: [
-          // Barre de navigation pour les pages Home
+          // Navigation bar for Home pages
           BottomNavyBarItem(
             icon: const Icon(Icons.home_outlined),
             title: const Padding(
@@ -79,7 +79,7 @@ class BottomNavState extends State<BottomNav> {
             textAlign: TextAlign.center,
           ),
 
-          // Barre de navigation pour les pages Search
+          // Navigation bar for Search pages
           BottomNavyBarItem(
             icon: const Icon(Icons.search),
             title: const Padding(
@@ -91,7 +91,7 @@ class BottomNavState extends State<BottomNav> {
             textAlign: TextAlign.center,
           ),
 
-          // Barre de navigation pour les pages Add
+          // Navigation bar for Add pages
           BottomNavyBarItem(
             icon: const Icon(Icons.add),
             title: const Padding(
@@ -103,7 +103,7 @@ class BottomNavState extends State<BottomNav> {
             textAlign: TextAlign.center,
           ),
 
-          // Barre de navigation pour les pages Favorite
+          // Navigation bar for Favorite pages
           BottomNavyBarItem(
             icon: const Icon(Icons.favorite_outline),
             title: const Padding(
@@ -115,7 +115,7 @@ class BottomNavState extends State<BottomNav> {
             textAlign: TextAlign.center,
           ),
 
-          // Barre de navigation pour les pages Profile
+          // Navigation bar for Profile pages
           BottomNavyBarItem(
             icon: const Icon(Icons.person_outline),
             title: const Padding(

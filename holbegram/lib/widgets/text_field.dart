@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-// Classe représentant un champ de texte
+// Class representing a text field
 class TextFieldInput extends StatelessWidget {
   final TextEditingController controller;
   final bool isPassword;
@@ -9,7 +9,7 @@ class TextFieldInput extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputType keyboardType;
 
-  // Constructeur pour initialiser les propriétés
+  // Constructor to initialize the properties
   const TextFieldInput({
     super.key,
     required this.controller,
@@ -19,7 +19,7 @@ class TextFieldInput extends StatelessWidget {
     this.keyboardType = TextInputType.text,
   });
 
-  // Méthode pour construire le widget
+  // Method to build the widget
   @override
   Widget build(BuildContext context) {
     return TextField(

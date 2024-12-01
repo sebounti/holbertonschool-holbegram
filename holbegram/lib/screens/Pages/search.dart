@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-// Définition de la classe Search
+// Definition of the Search class
+// State class associated with the Stateful Widget Search
+// Displaying images based on the search
 class Search extends StatefulWidget {
   const Search({super.key});
 

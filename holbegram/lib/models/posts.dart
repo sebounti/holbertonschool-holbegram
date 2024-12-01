@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-//  Classe représentant un Post (Publication)
+// Class representing a Post
 class Post {
   final String caption;
   final String uid;
@@ -11,7 +11,7 @@ class Post {
   final String postUrl;
   final String profImage;
 
-  // Constructeur de la classe Post
+  // Constructor for the Post class
   Post({
     required this.caption,
     required this.uid,
@@ -23,7 +23,7 @@ class Post {
     required this.profImage,
   });
 
-  // Méthode statique pour créer un Post à partir d'un Map JSON
+  // Static method to create a Post from a JSON Map
   static Post fromJson(Map<String, dynamic> json) {
     return Post(
       caption: json['caption'] ?? '',
@@ -39,7 +39,7 @@ class Post {
     );
   }
 
-  // Méthode pour convertir un Post en Map JSON
+  // Method to convert a Post to a JSON Map
   Map<String, dynamic> toJson() {
     return {
       'caption': caption,
@@ -53,30 +53,30 @@ class Post {
     };
   }
 
-  // Ajout d'une méthode pour vérifier si un utilisateur a liké le post
+  // Method to check if a user has liked the post
   bool isLikedBy(String userId) {
     return likes.contains(userId);
   }
 
-  // Ajout d'une méthode pour obtenir le nombre de likes
+  // Method to get the number of likes
   int get likesCount => likes.length;
 
-  // Ajout d'une méthode pour obtenir le temps écoulé depuis la publication
+  // Method to get the time elapsed since publication
   String get timeAgo {
     final difference = DateTime.now().difference(datePublished);
 
     if (difference.inDays > 365) {
-      return '${(difference.inDays / 365).floor()} an(s)';
+      return '${(difference.inDays / 365).floor()} year(s)';
     } else if (difference.inDays > 30) {
-      return '${(difference.inDays / 30).floor()} mois';
+      return '${(difference.inDays / 30).floor()} month(s)';
     } else if (difference.inDays > 0) {
-      return '${difference.inDays} jour(s)';
+      return '${difference.inDays} day(s)';
     } else if (difference.inHours > 0) {
-      return '${difference.inHours} heure(s)';
+      return '${difference.inHours} hour(s)';
     } else if (difference.inMinutes > 0) {
       return '${difference.inMinutes} minute(s)';
     } else {
-      return 'à l\'instant';
+      return 'just now';
     }
   }
 }
