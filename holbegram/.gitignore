@@ -69,3 +69,7 @@ android/local.properties
 android/gradle.properties
 android/settings_aar.gradle
 android/app/google-services.json
+
+# Env
+/assets/.env
+
